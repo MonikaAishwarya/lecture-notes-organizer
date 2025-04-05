@@ -155,7 +155,7 @@
 <body>
   <header>
     <h1>Manage Your Notes</h1>
-    <button onclick="logout()">Log Out</button>
+    <button id="logoutBtn">Log Out</button>
   </header>
 
   <div class="notes-container">
@@ -167,10 +167,41 @@
   <h2>Your Notes</h2>
   <div id="notes-list"></div>
 
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <!-- ✅ Firebase Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getStorage } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDlGuXcKG44ihvegBPDsxC5I-Tf6RDioJM",
+      authDomain: "lecture-notes-organizer-1.firebaseapp.com",
+      projectId: "lecture-notes-organizer-1",
+      storageBucket: "lecture-notes-organizer-1.appspot.com",
+      messagingSenderId: "1010797649637",
+      appId: "1:1010797649637:web:c47a1c4154d00d7c6dfe0c",
+      measurementId: "G-XPER8H185T"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Redirect to login if not signed in
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+
+  <!-- 🔥 Main App Logic -->
   <script type="module" src="js/script.js"></script>
 </body>
 </html>

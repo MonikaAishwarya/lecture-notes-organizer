@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log In</title>
+  <title>Sign Up</title>
   <style>
     * {
       box-sizing: border-box;
@@ -13,7 +13,7 @@
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -53,14 +53,14 @@
 
     input:focus {
       outline: none;
-      border-color: #007bff;
-      box-shadow: 0 0 5px rgba(0,123,255,0.2);
+      border-color: #28a745;
+      box-shadow: 0 0 5px rgba(40,167,69,0.2);
     }
 
     button {
       width: 100%;
       padding: 12px;
-      background-color: #007bff;
+      background-color: #28a745;
       color: white;
       border: none;
       border-radius: 6px;
@@ -71,7 +71,7 @@
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #1e7e34;
     }
 
     p {
@@ -80,7 +80,7 @@
     }
 
     a {
-      color: #007bff;
+      color: #28a745;
       text-decoration: none;
     }
 
@@ -91,22 +91,17 @@
 </head>
 <body>
   <div class="form-container">
-    <h2>Log In</h2>
-    <form id="login-form">
-      <input type="email" id="login-email" placeholder="Email" required>
-      <input type="password" id="login-password" placeholder="Password" required>
-      <button type="submit">Log In</button>
+    <h2>Sign Up</h2>
+    <form id="signup-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Sign Up</button>
     </form>
-    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    <p>Already have an account? <a href="login.html">Log in</a></p>
   </div>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-
-  <!-- Main Script -->
+  <!-- ✅ Only this script is needed for Firebase Modular SDK (v9+) -->
   <script type="module" src="js/script.js"></script>
 </body>
 </html>

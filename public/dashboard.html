@@ -1,7 +1,8 @@
+<!-- Only Firebase Auth and minimal logic for the dashboard -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Dashboard</title>
   <style>
     body {
@@ -92,8 +93,9 @@
 <body>
   <header>
     <h1>Welcome to Lecture Notes Organizer</h1>
-    <button onclick="logout()">Log Out</button>
+    <button id="logoutBtn">Log Out</button>
   </header>
+
   <main>
     <h2>What would you like to do?</h2>
     <div class="dashboard-options">
@@ -109,24 +111,31 @@
     </div>
   </main>
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCK0_apFYgKOT0-92JUQL6YeusVD9Zm4Zo",
-      authDomain: "lecture-notes-organizer.firebaseapp.com",
-      projectId: "lecture-notes-organizer",
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-    function logout() {
-      auth.signOut().then(() => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyDlGuXcKG44ihvegBPDsxC5I-Tf6RDioJM",
+      authDomain: "lecture-notes-organizer-1.firebaseapp.com",
+      projectId: "lecture-notes-organizer-1",
+      storageBucket: "lecture-notes-organizer-1.appspot.com",
+      messagingSenderId: "1010797649637",
+      appId: "1:1010797649637:web:c47a1c4154d00d7c6dfe0c",
+      measurementId: "G-XPER8H185T"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', () => {
+      signOut(auth).then(() => {
         window.location.href = "index.html";
       });
-    }
+    });
 
-    auth.onAuthStateChanged(user => {
+    onAuthStateChanged(auth, (user) => {
       if (!user) {
         window.location.href = "login.html";
       } else {
@@ -135,10 +144,10 @@
       }
     });
 
-    function showProfile() {
+    window.showProfile = function () {
       const profileDiv = document.getElementById("profile-info");
       profileDiv.style.display = profileDiv.style.display === "none" ? "block" : "none";
-    }
+    };
   </script>
 </body>
 </html>
