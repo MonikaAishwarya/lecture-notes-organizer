@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    header button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    header button:hover {
+      background-color: #c0392b;
+    }
+
+    main {
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+    }
+
+    .dashboard-options button {
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 1.1rem;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dashboard-options button:hover {
+      background-color: #2980b9;
+    }
+
+    .profile-info {
+      display: none;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 400px;
+      text-align: left;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .profile-info h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    .profile-info p {
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Lecture Notes Organizer</h1>
+    <button onclick="logout()">Log Out</button>
+  </header>
+  <main>
+    <h2>What would you like to do?</h2>
+    <div class="dashboard-options">
+      <button onclick="window.location.href='notes.html'">📝 Open Notes</button>
+      <button onclick="window.location.href='reminders.html'">⏰ Open Reminders</button>
+      <button onclick="showProfile()">👤 Profile</button>
+    </div>
+
+    <div class="profile-info" id="profile-info">
+      <h3>Your Account Details</h3>
+      <p><strong>Email:</strong> <span id="profile-email"></span></p>
+      <p><strong>Account Created:</strong> <span id="profile-created"></span></p>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCK0_apFYgKOT0-92JUQL6YeusVD9Zm4Zo",
+      authDomain: "lecture-notes-organizer.firebaseapp.com",
+      projectId: "lecture-notes-organizer",
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = "index.html";
+      });
+    }
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("profile-email").textContent = user.email;
+        document.getElementById("profile-created").textContent = new Date(user.metadata.creationTime).toLocaleString();
+      }
+    });
+
+    function showProfile() {
+      const profileDiv = document.getElementById("profile-info");
+      profileDiv.style.display = profileDiv.style.display === "none" ? "block" : "none";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reminders</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f8fb;
+      color: #333;
+    }
+
+    header {
+      background-color: #2c3e50;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #1abc9c;
+    }
+
+    section {
+      max-width: 700px;
+      background-color: white;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #34495e;
+    }
+
+    input[type="text"],
+    input[type="datetime-local"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    #reminders-list {
+      margin-top: 20px;
+    }
+
+    .reminder-card {
+      background-color: #ecf0f1;
+      border-left: 5px solid #3498db;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .reminder-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.2rem;
+    }
+
+    .reminder-card p {
+      margin: 0;
+      color: #555;
+    }
+
+    .reminder-card button {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      background-color: #e74c3c;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+
+    .reminder-card button:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Reminders</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="reminders.html">Reminders</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Create a Reminder</h2>
+    <input type="text" id="reminder-title" placeholder="Reminder Description" />
+    <input type="datetime-local" id="reminder-time" />
+    <button onclick="saveReminder()">Save Reminder</button>
+  </section>
+
+  <section>
+    <h2>Your Reminders</h2>
+    <div id="reminders-list"></div>
+  </section>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script type="module" src="js/reminders.js"></script>
+</body>
+
+</html>
