@@ -199,7 +199,7 @@ onAuthStateChanged(auth, user => {
     }
 
     // Show notes if on dashboard
-    if (path.includes("dashboard.html")) {
+    if (path.includes("notes.html")) {
       displayNotes(user.uid);
     }
 
